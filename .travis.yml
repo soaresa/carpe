@@ -1,4 +1,9 @@
 language: rust
+env:
+  - NODE_VERSION="0.16"
+before_install:
+  - nvm install $NODE_VERSION
+
 script:
   - yarn install
   
