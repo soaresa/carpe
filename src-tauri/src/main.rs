@@ -18,9 +18,71 @@ pub(crate) mod configs;
 pub(crate) mod configs_profile;
 pub(crate) mod key_manager;
 pub(crate) mod migrate;
+pub(crate) mod stream;
+
+use commands::wallets::keygen;
+
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+use libra_wallet::account_keys;
+use crate::stream::stream_main;
 
 #[tokio::main]
 async fn main() {
+  
+  stream_main::initialize().await;
+
+  /*println!(">>> 1. Get All Accounts");
+  let accounts = stream_account_manager::get_accounts().await;
+  match accounts {
+    Ok(accounts) => {
+      for account in accounts {
+        println!("Account: {:?}", account.address);
+        // print balances
+        for coin_balance in account.balances {
+          match coin_balance.coin {
+            Coin::WLibra => {
+              println!(">> wLIBRA Balance: {}", coin_balance.amount);
+              println!(">> wLIBRA price: {}", price);
+              println!(">> wLIBRA Balance in USDC: {}", coin_balance.amount as f64 * price);
+            },
+            _ => {
+              // Handle other coins if needed
+              println!("Balance: {}", coin_balance.amount);
+            }
+          }
+        }
+        
+        // remove account
+        //println!(">>> 2. Removing account: {:?}", account.address);
+        //let _ = stream_account_manager::remove_account(&account.address, account.chain);
+      }
+    },
+    Err(e) => {
+      println!("Error getting accounts: {}", e.msg);
+      eprintln!("Error getting accounts");
+    }
+  }
+
+  // check get accounts is empty
+  /*let accounts = stream_account_manager::get_accounts().await;
+  match accounts {
+    Ok(accounts) => {
+      if accounts.is_empty() {
+        println!(">>> 3. Remove account: Success >>> No accounts found");
+      } else {
+        println!(">>> 3. Remove account: Error >>> Accounts found");
+      }
+    },
+    Err(e) => {
+      println!("Error getting accounts: {}", e.msg);
+      eprintln!("Error getting accounts");
+    }
+  }*/*/
+  
+  println!(">>> Stream Trade Test Finished <<<");
+
   dbg!(&configs::default_config_path());
 
   match fs::create_dir_all(default_config_path()) {
@@ -149,3 +211,4 @@ async fn main() {
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
+

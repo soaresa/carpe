@@ -51,6 +51,27 @@ keyring = "^1.2"
 simplelog = { version = "^0.11.0", features = ["paris"] }
 tauri = { version = "^1.5.2", features = ["api-all", "updater"] }
 
+# trade stream
+cosmrs = "0.7.1"
+osmosis-std = "0.1.6"
+tiny-bip39 = "0.7.0"
+bip32 = "0.2"
+ripemd160 = "0.9"
+secp256k1 = { version = "0.22", features = ["rand"] }
+reqwest = { version = "0.11", features = ["json"] }
+bech32 = "0.8"
+hdpath = "0.2"
+k256 = { version = "0.9.4", features = ["ecdsa"] }
+sha2 = "0.9"
+tendermint-rpc = { version = "0.23", features = ["http-client"] }
+prost = "0.10.4"
+prost-types = "0.10.1"
+base64 = "0.13.0"
+dotenv = "0.15.0"
+rayon = "1.5"
+rand = "0.8"
+chrono = "0.4"
+
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]
@@ -71,3 +92,4 @@ serde_yaml = "0.8.24"
 # panic = 'abort'   # Abort on panic
 # debug = false     # remove debug on compile
 # strip = true      # strip debug and symbols for size
+
